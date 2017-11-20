@@ -16,4 +16,5 @@ public class RabbitConfig {
     public Queue helloQueue() {
         return new Queue("hello_rq");
     }
+
 }
