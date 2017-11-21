@@ -1,6 +1,5 @@
 package com.han.springbootrabbitmq.hello;
 
-import com.han.springbootrabbitmq.topic.TopicSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

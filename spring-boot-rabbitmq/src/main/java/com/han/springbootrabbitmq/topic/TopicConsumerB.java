@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RabbitListener(bindings = @QueueBinding(
         //value = @Queue(value = "myQueue", durable = "true"),
         value = @Queue, // 自动生成， 自动删除
-        exchange = @Exchange(value = "ex-topic", ignoreDeclarationExceptions = "true", type = ExchangeTypes.TOPIC),
+        exchange = @Exchange(value = "ex.topic", ignoreDeclarationExceptions = "true", type = ExchangeTypes.TOPIC),
         key = "*.*.haha")
 )
 public class TopicConsumerB {
