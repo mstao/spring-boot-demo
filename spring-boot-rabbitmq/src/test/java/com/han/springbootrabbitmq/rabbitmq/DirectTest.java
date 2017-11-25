@@ -1,6 +1,6 @@
 package com.han.springbootrabbitmq.rabbitmq;
 
-import com.han.springbootrabbitmq.direct.DirectPublisher;
+import com.han.springbootrabbitmq.direct.DirectProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class DirectTest {
     @Autowired
-    private DirectPublisher directPublisher;
+    private DirectProducer directProducer;
 
     @Test
     public void test() {
-        directPublisher.send();
+        directProducer.send();
     }
 }

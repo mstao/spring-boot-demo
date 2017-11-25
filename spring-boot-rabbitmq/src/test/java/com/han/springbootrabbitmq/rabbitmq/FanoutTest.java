@@ -1,7 +1,6 @@
 package com.han.springbootrabbitmq.rabbitmq;
 
-import com.han.springbootrabbitmq.fanout.FanoutPublisher;
-import com.han.springbootrabbitmq.topic.TopicPublisher;
+import com.han.springbootrabbitmq.fanout.FanoutProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class FanoutTest {
     @Autowired
-    private FanoutPublisher fanoutPublisher;
+    private FanoutProducer fanoutProducer;
 
     @Test
     public void test() {
-        fanoutPublisher.send();
+        fanoutProducer.send();
     }
 }

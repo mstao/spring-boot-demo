@@ -1,6 +1,6 @@
 package com.han.springbootrabbitmq.headers;
 
-import com.han.springbootrabbitmq.topic.TopicPublisher;
+import com.han.springbootrabbitmq.topic.TopicProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
  * @Date: Created in 23:18 2017/11/21
  */
 @Component
-public class HeadersPublisher {
-    private final static Logger logger = LoggerFactory.getLogger(TopicPublisher.class);
+public class HeadersProducer {
+    private final static Logger logger = LoggerFactory.getLogger(TopicProducer.class);
 
     @Autowired
     private AmqpTemplate amqpTemplate;

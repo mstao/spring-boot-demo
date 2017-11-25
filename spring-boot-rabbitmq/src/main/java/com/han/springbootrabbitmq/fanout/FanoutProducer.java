@@ -1,6 +1,5 @@
 package com.han.springbootrabbitmq.fanout;
 
-import com.han.springbootrabbitmq.topic.TopicPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: Created in 22:12 2017/11/21
  */
 @Component
-public class FanoutPublisher {
-    private final static Logger logger = LoggerFactory.getLogger(FanoutPublisher.class);
+public class FanoutProducer {
+    private final static Logger logger = LoggerFactory.getLogger(FanoutProducer.class);
 
     @Autowired
     private AmqpTemplate amqpTemplate;

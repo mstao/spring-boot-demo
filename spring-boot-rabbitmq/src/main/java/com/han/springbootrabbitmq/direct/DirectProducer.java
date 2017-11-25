@@ -1,6 +1,5 @@
 package com.han.springbootrabbitmq.direct;
 
-import com.han.springbootrabbitmq.topic.TopicPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: Created in 22:52 2017/11/21
  */
 @Component
-public class DirectPublisher {
-    private final static Logger logger = LoggerFactory.getLogger(DirectPublisher.class);
+public class DirectProducer {
+    private final static Logger logger = LoggerFactory.getLogger(DirectProducer.class);
 
     @Autowired
     private AmqpTemplate amqpTemplate;

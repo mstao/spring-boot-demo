@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: Created in 22:46 2017/11/20
  */
 @Component
-public class TopicPublisher {
-    private final static Logger logger = LoggerFactory.getLogger(TopicPublisher.class);
+public class TopicProducer {
+    private final static Logger logger = LoggerFactory.getLogger(TopicProducer.class);
 
     @Autowired
     private AmqpTemplate amqpTemplate;

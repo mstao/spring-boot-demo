@@ -1,6 +1,6 @@
 package com.han.springbootrabbitmq.rabbitmq;
 
-import com.han.springbootrabbitmq.topic.TopicPublisher;
+import com.han.springbootrabbitmq.topic.TopicProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class TopicTest {
     @Autowired
-    private TopicPublisher topicPublisher;
+    private TopicProducer topicProducer ;
 
     @Test
     public void test() {
-        topicPublisher.send();
+        topicProducer.send();
     }
 }
