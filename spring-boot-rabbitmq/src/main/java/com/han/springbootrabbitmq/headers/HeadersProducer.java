@@ -3,10 +3,7 @@ package com.han.springbootrabbitmq.headers;
 import com.han.springbootrabbitmq.topic.TopicProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +28,18 @@ public class HeadersProducer {
                 .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
                 .setMessageId("123")
                 .setHeader("xiaoming", "123456")
+                .build();
+
+
+        // =======================
+
+        MessageProperties props = MessagePropertiesBuilder.newInstance()
+                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
+                .setMessageId("123")
+                .setHeader("xiaoming", "123456")
+                .build();
+        Message message2 = MessageBuilder.withBody(mes.getBytes())
+                .andProperties(props)
                 .build();
 
         // 参数意义

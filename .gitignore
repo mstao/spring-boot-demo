@@ -1,13 +1,20 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
+# Compiled class file
+*.class
 
-### STS ###
-.apt_generated
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# eclipse #
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
 
 ### IntelliJ IDEA ###
 .idea
@@ -15,10 +22,7 @@ target/
 *.iml
 *.ipr
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+### my own ###
+.settings
+target
+.idea

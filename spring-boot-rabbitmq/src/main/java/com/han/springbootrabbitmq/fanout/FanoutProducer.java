@@ -21,7 +21,7 @@ public class FanoutProducer {
     public void send() {
         String message = "This is topic message ====!";
         logger.info("message => " + message);
-        this.amqpTemplate.convertAndSend("ex.fanout","", message);
+        this.amqpTemplate.convertAndSend("ex.fanout", "", message);
     }
 
 }
