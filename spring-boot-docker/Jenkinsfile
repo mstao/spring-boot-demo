@@ -1,0 +1,87 @@
+pipeline {
+    agent any
+
+    environment {
+        REPOSITORY="https://github.com/mstao/spring-boot-learning.git"
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+                echo "<<< Starting fetch code from git:${REPOSITORY}"
+                git credentialsId: "bd8b65ce-7fd2-4e57-a9fe-45d4fe2924bf", url: "${REPOSITORY}", branch: "$BRANCH_NAME"
+            }
+        }
+
+        stage('check code') {
+            steps {
+                // chek code
+                // Jenkins 集成 sonar 进行代码审查
+                echo "<<<Starting check and analytic code"
+            }
+        }
+
+        stage('build code') {
+            steps {
+                echo "<<< Starting build code and docker image"
+                withMaven (
+                    maven: 'Maven 3.5.4',
+                    mavenLocalRepo: '.repository') {
+                        sh 'mvn clean package -Dmaven.test.skip=true'
+                    }
+            }
+        }
+
+        stage('release package') {
+            steps {
+                echo "<<< release package to /var/jenkins_home/release/demo/$ENV/$BRANCH_NAME"
+                sh '''
+                    if [ -d target/demo ]
+                        then
+                        rm -rf target/demo
+                    fi
+                    mkdir -p target/demo
+                '''
+                sh '''
+                    cp target/*.jar target/demo/demo-api.jar
+                    cp deploy.sh target/demo/
+                    cp Dockerfile target/demo/
+                    cd target
+                    tar zcvf demo.tar.gz demo
+                    exit
+                '''
+                sh '''
+                    if [ ! -d /var/jenkins_home/release/demo/$ENV/$BRANCH_NAME ]
+                        then
+                        mkdir -p /var/jenkins_home/release/demo/$ENV/$BRANCH_NAME
+                    fi
+                '''
+                sh 'cp -f target/*.tar.gz /var/jenkins_home/release/demo/$ENV/$BRANCH_NAME'
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                echo "<<< Starting deploy code to docker"
+                 script {
+                    try {
+                        sh '''
+                            ssh -p $SSH_PORT -o StrictHostKeyChecking=no mingshan@$TARGET_MACHINE_IP rm -rf /app/tmp/demo/package
+                            ssh -p $SSH_PORT mingshan@$TARGET_MACHINE_IP mkdir -p /app/tmp/demo/package
+                        '''
+                    }
+                    catch(e) {
+                        echo e
+                    }
+                }
+                sh '''
+                    scp -P $SSH_PORT /var/jenkins_home/release/demo/$ENV/$BRANCH_NAME/*.tar.gz mingshan@$TARGET_MACHINE_IP:/app/tmp/demo/package/
+                    ssh -p $SSH_PORT mingshan@$TARGET_MACHINE_IP "tar -zxf /app/tmp/demo/package/demo.tar.gz -C /app/tmp/demo/package"
+                    ssh -p $SSH_PORT mingshan@$TARGET_MACHINE_IP "cd /app/tmp/demo/package/demo && chmod +x * && sh deploy.sh $TARGET_PORT"
+                    exit
+                '''
+                echo "deploy done"
+            }
+        }
+    }
+}
